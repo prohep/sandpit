@@ -1,4 +1,4 @@
 sandpit
 =======
 
-This is where I will get some practice
+Some kickstart template files modified - thanks to original contributors (named in files)
