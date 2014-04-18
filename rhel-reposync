@@ -1,0 +1,14 @@
+#!/bin/bash
+
+unset $REPOS
+
+yum repolist | grep ^rh | cut -d " " -f 1 > file.txt
+
+exec 3<file.txt
+
+while read -u3 line
+ do
+    /usr/bin/reposync --gpgcheck -l -d -n --repoid=$line --download_path=/srv/mirrors/updates
+    /usr/bin/createrepo --update -d /srv/mirrors/updates/$line
+    /usr/bin/repoview -q /srv/mirrors/updates/$line
+ done <&3
